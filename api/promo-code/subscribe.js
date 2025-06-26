@@ -52,7 +52,7 @@ app.get("/api/promo-code/subscribe", async (req, res) => {
       user_email: req.body.email,
     };
     const a = await addToNewsletter("promo-codes", dataToEnter);
-    const mailres = sendNewsletterMail(req.body.email, promoCode);
+    const mailres = await sendNewsletterMail(req.body.email, promoCode);
     console.log(mailres);
     res.json({
       message:
