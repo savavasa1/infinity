@@ -1,4 +1,3 @@
-const serviceAccount = require("../infinity-planners-firebase-adminsdk-fbsvc-b2def18657.json");
 const admin = require("firebase-admin"); // Import the Firebase Admin SDK
 require("dotenv").config();
 
