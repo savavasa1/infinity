@@ -1,4 +1,4 @@
-const sendNewsletterMail = (mail, promoCode) => {
+const sendNewsletterMail = async (mail, promoCode) => {
   const nodemailer = require("nodemailer");
   const handlebars = require("handlebars");
   const fs = require("fs");
@@ -40,7 +40,7 @@ const sendNewsletterMail = (mail, promoCode) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return console.error("Error sending email:", error);
+      return error;
     }
     return { message: "Email sent:", info: info };
   });

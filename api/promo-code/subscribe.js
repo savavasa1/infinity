@@ -53,6 +53,7 @@ app.get("/api/promo-code/subscribe", async (req, res) => {
     };
     const a = await addToNewsletter("promo-codes", dataToEnter);
     const mailres = sendNewsletterMail(req.body.email, promoCode);
+    console.log(mailres);
     res.json({
       message:
         "You have successfully subscribed! Check your inbox. Your special promo code is on the way!",
