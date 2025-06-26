@@ -16,7 +16,10 @@ const firebaseCredentials = {
 };
 
 admin.initializeApp({
-  credential: admin.credential.cert(firebaseCredentials),
+  credential: admin.credential.cert({
+    ...firebaseCredentials,
+    private_key: private_key.replace("\n", /\\n/g),
+  }),
 });
 
 const db = admin.firestore(); // This is how you get the Firestore instance with Admin SDK
