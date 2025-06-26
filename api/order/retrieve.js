@@ -10,8 +10,6 @@ app.use(
 
 app.use(express.json());
 
-//0c8c53b50b609bcf1e01203a639ff7cdf0513528b5ab3b3bf8a6b84be5a61bad
-
 app.get("/api/order/retrieve", async (req, res) => {
   const aa = req.body;
   console.log(aa);
