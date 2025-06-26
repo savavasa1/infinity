@@ -2,7 +2,6 @@ const admin = require("firebase-admin"); // Import the Firebase Admin SDK
 require("dotenv").config();
 
 const serviceFromEnv = JSON.parse(process.env.FIREBASE_AUTH);
-console.log("firebase", serviceFromEnv);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceFromEnv),
