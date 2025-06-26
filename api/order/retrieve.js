@@ -10,7 +10,7 @@ app.use(
 
 app.use(express.json());
 
-app.get("/api/order/retrieve", async (req, res) => {
+app.post("/api/order/retrieve", async (req, res) => {
   const aa = req.body;
   console.log(aa);
   //   const data = await response.json();
