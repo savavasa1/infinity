@@ -13,12 +13,10 @@ const sendNewsletterMail = async (mail, promoCode) => {
 
   // Setup transporter using Zoho SMTP
   const transporter = nodemailer.createTransport({
-    host: "smtp.zoho.eu",
-    port: 465,
-    secure: true,
+    service: "gmail",
     auth: {
-      user: process.env.MAIL, // Your email
-      pass: process.env.MAIL_PASSWORD, // Your email password or app-specific password
+      user: process.env.MAIL,
+      pass: process.env.APP_PASSWORD_NO_SPACES,
     },
   });
 
@@ -32,7 +30,7 @@ const sendNewsletterMail = async (mail, promoCode) => {
 
   // Email options
   const mailOptions = {
-    from: "savatest@zohomail.eu",
+    from: process.env.MAIL,
     to: mail, // Replace with subscriber's email
     subject: "Your 10% Off Coupon Code 🎉",
     html: htmlOutput,
