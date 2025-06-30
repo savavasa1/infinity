@@ -21,6 +21,25 @@ async function isEmailSubscribed(collectionName = "promo-codes", email) {
   return true;
 }
 
+async function checkPromoCode(code, collectionName = "promo-codes") {
+  const docRef = await db.collection(collectionName).get();
+
+  const data = docRef.docs.map((doc) => doc.data());
+
+  console.log(data, code, "aa");
+  const snapshot = data.find((present) => present.code_name === code);
+
+  if (typeof snapshot === "undefined") {
+    return { message: "You have entered an invalid code!" };
+  }
+
+  if (snapshot.is_used) {
+    return { message: "This promo code has already been used!" };
+  }
+
+  return snapshot;
+}
+
 async function addToNewsletter(collectionName = "promo-codes", data) {
   const docRef = await db
     .collection(collectionName)
@@ -29,4 +48,4 @@ async function addToNewsletter(collectionName = "promo-codes", data) {
   return docRef;
 }
 
-module.exports = { isEmailSubscribed, addToNewsletter };
+module.exports = { isEmailSubscribed, addToNewsletter, checkPromoCode };
