@@ -18,7 +18,7 @@ app.use(
 
 app.use(express.json());
 
-app.get("/api/promo-code/subscribe", async (req, res) => {
+app.post("/api/promo-code/subscribe", async (req, res) => {
   const isMailValid = checkEmailValidity(req.body.email);
   if (!isMailValid) {
     return res.status(422).json({
