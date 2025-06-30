@@ -8,6 +8,7 @@ const checkEmailValidity = require("../../services/checkEmailValidity");
 const {
   isEmailSubscribed,
   addToNewsletter,
+  checkDuplicatePromoCode,
 } = require("../../services/firestore");
 
 app.use(
