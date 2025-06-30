@@ -60,9 +60,25 @@ async function addToNewsletter(collectionName = "promo-codes", data) {
   return docRef;
 }
 
+async function applyPromoCode(data, collectionName = "promo-codes") {
+  const docRef = await db.collection(collectionName).get();
+
+  const res = docRef.docs.map((doc) => doc.data());
+
+  const user = res.find((present) => present.code_name === data);
+
+  const updatedUser = await db
+    .collection(collectionName)
+    .doc(user.user_email)
+    .set({ ...user, is_used: true });
+
+  return { ...user, is_used: true };
+}
+
 module.exports = {
   isEmailSubscribed,
   addToNewsletter,
   checkPromoCode,
   checkDuplicatePromoCode,
+  applyPromoCode,
 };
