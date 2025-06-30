@@ -42,7 +42,18 @@ app.post("/api/promo-code/subscribe", async (req, res) => {
     // console.log("Document written with custom ID:", isSubscribed, data);
     // sendNewsletterMail(data.user_email, data.code_name);
 
-    const promoCode = generatePromoCode(12);
+    let promoCode;
+    let promoCodeCharacter = 12;
+    promoCode = generatePromoCode(promoCodeCharacter);
+
+    let isCodeExist;
+
+    do {
+      promoCodeCharacter++;
+      generatePromoCode(promoCodeCharacter);
+      isCodeExist = checkDuplicatePromoCode(promoCode);
+    } while (isCodeExist);
+
     const dataToEnter = {
       code_name: promoCode,
       discount_type: "percentage",

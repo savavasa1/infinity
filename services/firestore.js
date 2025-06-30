@@ -26,7 +26,6 @@ async function checkPromoCode(code, collectionName = "promo-codes") {
 
   const data = docRef.docs.map((doc) => doc.data());
 
-  console.log(data, code, "aa");
   const snapshot = data.find((present) => present.code_name === code);
 
   if (typeof snapshot === "undefined") {
@@ -40,6 +39,19 @@ async function checkPromoCode(code, collectionName = "promo-codes") {
   return snapshot;
 }
 
+async function checkDuplicatePromoCode(code, collectionName = "promo-codes") {
+  const docRef = await db.collection(collectionName).get();
+
+  const data = docRef.docs.map((doc) => doc.data());
+
+  const snapshot = data.find((present) => present.code_name === code);
+
+  if (!snapshot) {
+    return false;
+  }
+  return true;
+}
+
 async function addToNewsletter(collectionName = "promo-codes", data) {
   const docRef = await db
     .collection(collectionName)
@@ -48,4 +60,9 @@ async function addToNewsletter(collectionName = "promo-codes", data) {
   return docRef;
 }
 
-module.exports = { isEmailSubscribed, addToNewsletter, checkPromoCode };
+module.exports = {
+  isEmailSubscribed,
+  addToNewsletter,
+  checkPromoCode,
+  checkDuplicatePromoCode,
+};
