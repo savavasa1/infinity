@@ -8,6 +8,7 @@ const checkEmailValidity = require("../../services/checkEmailValidity");
 const {
   isEmailSubscribed,
   addToNewsletter,
+  checkDuplicatePromoCode,
 } = require("../../services/firestore");
 
 app.use(
@@ -18,7 +19,7 @@ app.use(
 
 app.use(express.json());
 
-app.get("/api/promo-code/subscribe", async (req, res) => {
+app.post("/api/promo-code/subscribe", async (req, res) => {
   const isMailValid = checkEmailValidity(req.body.email);
   if (!isMailValid) {
     return res.status(422).json({
@@ -42,7 +43,18 @@ app.get("/api/promo-code/subscribe", async (req, res) => {
     // console.log("Document written with custom ID:", isSubscribed, data);
     // sendNewsletterMail(data.user_email, data.code_name);
 
-    const promoCode = generatePromoCode(12);
+    let promoCode;
+    let promoCodeCharacter = 12;
+    promoCode = generatePromoCode(promoCodeCharacter);
+
+    let isCodeExist;
+
+    do {
+      promoCodeCharacter++;
+      generatePromoCode(promoCodeCharacter);
+      isCodeExist = checkDuplicatePromoCode(promoCode);
+    } while (isCodeExist);
+
     const dataToEnter = {
       code_name: promoCode,
       discount_type: "percentage",
@@ -52,7 +64,8 @@ app.get("/api/promo-code/subscribe", async (req, res) => {
       user_email: req.body.email,
     };
     const a = await addToNewsletter("promo-codes", dataToEnter);
-    const mailres = sendNewsletterMail(req.body.email, promoCode);
+    const mailres = await sendNewsletterMail(req.body.email, promoCode);
+    console.log(mailres);
     res.json({
       message:
         "You have successfully subscribed! Check your inbox. Your special promo code is on the way!",
