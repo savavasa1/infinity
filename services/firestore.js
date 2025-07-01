@@ -1,23 +1,10 @@
-const serviceAccount = require("../infinity-planners-firebase-adminsdk-fbsvc-b2def18657.json");
 const admin = require("firebase-admin"); // Import the Firebase Admin SDK
 require("dotenv").config();
 
-const firebaseCredentials = {
-  type: process.env.FIREBASE_TYPE,
-  project_id: process.env.FIREBASE_PROJECT_ID,
-  private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
-  private_key: process.env.FIREBASE_PRIVATE_KEY,
-  client_email: process.env.FIREBASE_CLIENT_EMAIL,
-  client_id: process.env.FIREBASE_CLIENT_ID,
-  auth_uri: process.env.FIREBASE_AUTH_URI,
-  token_uri: process.env.FIREBASE_TOKEN_URI,
-  auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
-  client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
-  universe_domain: process.env.FIREBASE_UNIVERSE_DOMAIN,
-};
+const serviceFromEnv = JSON.parse(process.env.FIREBASE_AUTH);
 
 admin.initializeApp({
-  credential: admin.credential.cert(firebaseCredentials),
+  credential: admin.credential.cert(serviceFromEnv),
 });
 
 const db = admin.firestore(); // This is how you get the Firestore instance with Admin SDK
@@ -34,6 +21,37 @@ async function isEmailSubscribed(collectionName = "promo-codes", email) {
   return true;
 }
 
+async function checkPromoCode(code, collectionName = "promo-codes") {
+  const docRef = await db.collection(collectionName).get();
+
+  const data = docRef.docs.map((doc) => doc.data());
+
+  const snapshot = data.find((present) => present.code_name === code);
+
+  if (typeof snapshot === "undefined") {
+    return { message: "You have entered an invalid code!" };
+  }
+
+  if (snapshot.is_used) {
+    return { message: "This promo code has already been used!" };
+  }
+
+  return snapshot;
+}
+
+async function checkDuplicatePromoCode(code, collectionName = "promo-codes") {
+  const docRef = await db.collection(collectionName).get();
+
+  const data = docRef.docs.map((doc) => doc.data());
+
+  const snapshot = data.find((present) => present.code_name === code);
+
+  if (!snapshot) {
+    return false;
+  }
+  return true;
+}
+
 async function addToNewsletter(collectionName = "promo-codes", data) {
   const docRef = await db
     .collection(collectionName)
@@ -42,4 +60,25 @@ async function addToNewsletter(collectionName = "promo-codes", data) {
   return docRef;
 }
 
-module.exports = { isEmailSubscribed, addToNewsletter };
+async function applyPromoCode(data, collectionName = "promo-codes") {
+  const docRef = await db.collection(collectionName).get();
+
+  const res = docRef.docs.map((doc) => doc.data());
+
+  const user = res.find((present) => present.code_name === data);
+
+  const updatedUser = await db
+    .collection(collectionName)
+    .doc(user.user_email)
+    .set({ ...user, is_used: true });
+
+  return { ...user, is_used: true };
+}
+
+module.exports = {
+  isEmailSubscribed,
+  addToNewsletter,
+  checkPromoCode,
+  checkDuplicatePromoCode,
+  applyPromoCode,
+};
