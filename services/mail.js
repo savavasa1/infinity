@@ -5,10 +5,9 @@ const path = require("path");
 require("dotenv").config();
 
 const sendNewsletterMail = async (mail, promoCode) => {
-  console.log("udje u slanje mejla");
   // Read HTML email template
   const emailTemplate = fs.readFileSync(
-    path.join(__dirname, "newsletter.html"),
+    "https://infinity-one-tau.vercel.app/services/newsletter.html",
     "utf8"
   );
 
@@ -20,9 +19,7 @@ const sendNewsletterMail = async (mail, promoCode) => {
       pass: process.env.APP_PASSWORD_NO_SPACES,
     },
   });
-  const template = handlebars.compile(
-    "https://infinity-one-tau.vercel.app/services/newsletter.html"
-  );
+  const template = handlebars.compile(emailTemplate);
 
   const data = {
     COUPON_CODE: promoCode,
