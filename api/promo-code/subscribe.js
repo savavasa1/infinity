@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 // const admin = require("firebase-admin"); // Import the Firebase Admin SDK
-const sendNewsletterMail = require("../../services/mail");
+const { sendNewsletterMail } = require("../../services/mail");
 const generatePromoCode = require("../../services/generatePromoCode");
 const checkEmailValidity = require("../../services/checkEmailValidity");
 const {
@@ -10,10 +10,11 @@ const {
   addToNewsletter,
   checkDuplicatePromoCode,
 } = require("../../services/firestore");
+require("dotenv").config();
 
 app.use(
   cors({
-    origin: "*",
+    origin: process.env.DEV_DOMAIN,
   })
 );
 
@@ -27,7 +28,6 @@ app.post("/api/promo-code/subscribe", async (req, res) => {
       status: 422,
     });
   }
-
   const isSubscribed = await isEmailSubscribed("promo-codes", req.body.email);
   if (isSubscribed) {
     res.status(409).json({
@@ -46,14 +46,15 @@ app.post("/api/promo-code/subscribe", async (req, res) => {
     let promoCode;
     let promoCodeCharacter = 12;
     promoCode = generatePromoCode(promoCodeCharacter);
-
-    let isCodeExist;
-
-    do {
+    let checkExistenceOfPromoCode = await checkDuplicatePromoCode(promoCode);
+    const newPromoCode = () => {
       promoCodeCharacter++;
-      generatePromoCode(promoCodeCharacter);
-      isCodeExist = checkDuplicatePromoCode(promoCode);
-    } while (isCodeExist);
+      promoCode = generatePromoCode(promoCodeCharacter);
+      return checkDuplicatePromoCode(promoCode);
+    };
+    if (checkExistenceOfPromoCode) {
+      newPromoCode();
+    }
 
     const dataToEnter = {
       code_name: promoCode,
@@ -65,7 +66,6 @@ app.post("/api/promo-code/subscribe", async (req, res) => {
     };
     const a = await addToNewsletter("promo-codes", dataToEnter);
     const mailres = await sendNewsletterMail(req.body.email, promoCode);
-    console.log(mailres);
     res.json({
       message:
         "You have successfully subscribed! Check your inbox. Your special promo code is on the way!",
