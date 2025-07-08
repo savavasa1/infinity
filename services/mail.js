@@ -5,7 +5,6 @@ const path = require("path");
 require("dotenv").config();
 
 const sendNewsletterMail = async (mail, promoCode) => {
-  console.log("udje u slanje mejla");
   // Read HTML email template
   const emailTemplate = fs.readFileSync(
     "https://infinity-one-tau.vercel.app/services/newsletter.html",
