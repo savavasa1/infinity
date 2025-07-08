@@ -3,13 +3,14 @@ const handlebars = require("handlebars");
 const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
+const axios = require("axios");
 
 const sendNewsletterMail = async (mail, promoCode) => {
   // Read HTML email template
-  const emailTemplate = fs.readFileSync(
-    "https://infinity-one-tau.vercel.app/services/newsletter.html",
-    "utf8"
+  const response = await axios.get(
+    "https://infinity-one-tau.vercel.app/services/newsletter.html"
   );
+  const emailTemplate = response.data;
 
   // Setup transporter using Zoho SMTP
   const transporter = nodemailer.createTransport({
