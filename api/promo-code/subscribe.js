@@ -31,7 +31,7 @@ app.post("/api/promo-code/subscribe", async (req, res) => {
   const isSubscribed = await isEmailSubscribed("promo-codes", req.body.email);
   if (isSubscribed) {
     res.status(409).json({
-      message: "Email is already subscribed to the newsletter.",
+      error: "Email is already subscribed to the newsletter.",
     });
   }
   if (!isSubscribed) {
