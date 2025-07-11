@@ -14,7 +14,6 @@ app.use(express.json());
 
 app.post("/api/order/retrieve", async (req, res) => {
   const rqBdy = req.body;
-  console.log(rqBdy, "u retrive");
   const prod = await orderReceivedMail(rqBdy.payload.data, rqBdy.payload.id);
   //   const data = await response.json();
   //   console.log(data);

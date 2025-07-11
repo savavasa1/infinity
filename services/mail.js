@@ -93,7 +93,7 @@ const orderReceivedMail = async (data, id) => {
   //   return { message: "Email sent:", info: info };
   // });
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
@@ -101,8 +101,6 @@ const orderReceivedMail = async (data, id) => {
       pass: process.env.APP_PASSWORD_NO_SPACES,
     },
   });
-
-  console.log(transporter);
 
   const template = handlebars.compile(emailTemplate);
 
@@ -112,8 +110,6 @@ const orderReceivedMail = async (data, id) => {
     products: tableAll,
   });
 
-  console.log(htmlOutput);
-
   // Email options
   const mailOptions = {
     from: "sava.stankovic2002@gmail.com",
@@ -122,7 +118,7 @@ const orderReceivedMail = async (data, id) => {
     html: htmlOutput,
   };
 
-  console.log(mailOptions);
+  console.log(transporter);
   transporter.sendMail(mailOptions, (error, info) => {
     console.log("first");
     if (error) {
