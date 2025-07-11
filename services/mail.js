@@ -51,6 +51,8 @@ const orderReceivedMail = async (data, id) => {
   );
   const emailTemplate = response.data;
 
+  console.log(data, "data");
+
   let variables = {
     name: data.Name,
     email: data.Email,
