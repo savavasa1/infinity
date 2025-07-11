@@ -51,8 +51,6 @@ const orderReceivedMail = async (data, id) => {
   );
   const emailTemplate = response.data;
 
-  console.log(data, "data");
-
   let variables = {
     name: data.Name,
     email: data.Email,
@@ -110,8 +108,8 @@ const orderReceivedMail = async (data, id) => {
 
   // Email options
   const mailOptions = {
-    from: "sava.stankovic2002@gmail.com",
-    to: "sava.stankovic@boopro.tech", // Replace with subscriber's email
+    from: process.env.MAIL,
+    to: data.Email,
     subject: "Thank You for Your Order! 🛍️",
     html: htmlOutput,
   };
