@@ -92,6 +92,8 @@ const orderReceivedMail = async (data, id) => {
   // });
   const transporter = nodemailer.createTransport({
     service: "gmail",
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.MAIL,
       pass: process.env.APP_PASSWORD_NO_SPACES,
@@ -115,8 +117,11 @@ const orderReceivedMail = async (data, id) => {
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
+      console.error(error);
       return error;
     }
+    console.log("Email sent:", info);
+
     return { message: "Email sent:", info: info };
   });
 };
