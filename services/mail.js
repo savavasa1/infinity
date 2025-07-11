@@ -57,12 +57,12 @@ const orderReceivedMail = async (data, id) => {
     name: data.Name,
     email: data.Email,
     phone: data.Phone,
-    address: `${data["Street%20Address"]}, ${data["Zip%20Code"]} ${data.City}, ${data.Country} `,
-    cart: data["Cart%20Order"],
-    total: data["Total%20Price"],
-    subtotal: data["Subtotal%20Price"],
+    address: `${data["Street Address"]}, ${data["Zip Code"]} ${data.City}, ${data.Country} `,
+    cart: data["Cart Order"],
+    total: data["Total Price"],
+    subtotal: data["Subtotal Price"],
     OrderID: id,
-    shippingMethod: data["Shipping%20Method"],
+    shippingMethod: data["Shipping Method"],
   };
 
   const mapProducts = async () => {
