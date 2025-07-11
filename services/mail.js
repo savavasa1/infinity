@@ -84,6 +84,8 @@ const orderReceivedMail = async (data, id) => {
 
   const tableAll = await mapProducts();
 
+  console.log(tableAll);
+
   // transporter.sendMail(mailOptions, (error, info) => {
   //   if (error) {
   //     return console.error("Error sending email:", error);
@@ -100,6 +102,8 @@ const orderReceivedMail = async (data, id) => {
     },
   });
 
+  console.log(transporter);
+
   const template = handlebars.compile(emailTemplate);
 
   const htmlOutput = template({
@@ -108,13 +112,17 @@ const orderReceivedMail = async (data, id) => {
     products: tableAll,
   });
 
+  console.log(htmlOutput);
+
   // Email options
   const mailOptions = {
-    from: process.env.MAIL,
+    from: "sava.stankovic2002@gmail.com",
     to: data.Email,
     subject: "Thank You for Your Order! 🛍️",
     html: htmlOutput,
   };
+
+  console.log(mailOptions);
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error(error);
