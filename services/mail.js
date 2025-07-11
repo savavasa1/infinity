@@ -124,8 +124,9 @@ const orderReceivedMail = async (data, id) => {
 
   console.log(mailOptions);
   transporter.sendMail(mailOptions, (error, info) => {
+    console.log("first");
     if (error) {
-      console.error(error);
+      console.log(error);
       return error;
     }
     console.log("Email sent:", info);
