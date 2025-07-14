@@ -56,6 +56,7 @@ const orderReceivedMail = async (data, id) => {
     subtotal: data["Subtotal Price"],
     OrderID: id,
     shippingMethod: data["Shipping Method"],
+    shippingPrice: data["Shipping Price"],
   };
 
   const mapProducts = async () => {
