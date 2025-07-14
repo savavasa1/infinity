@@ -113,7 +113,7 @@ const orderReceivedMail = async (data, id) => {
     from: "sava.stankovic2002@gmail.com",
     to: data.Email,
     subject: "Thank You for Your Order! 🛍️",
-    html: <p>texst</p>,
+    html: htmlOutput,
   };
 
   const sendMail = await transporter.sendMail(mailOptions);
