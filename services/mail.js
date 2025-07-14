@@ -116,7 +116,7 @@ const orderReceivedMail = async (data, id) => {
     html: <p>texst</p>,
   };
 
-  const sendMail = transporter.sendMail(mailOptions);
+  const sendMail = await transporter.sendMail(mailOptions);
 
   return sendMail;
 };
