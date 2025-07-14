@@ -36,13 +36,8 @@ const sendNewsletterMail = async (mail, promoCode) => {
     subject: "Your 10% Off Coupon Code 🎉",
     html: htmlOutput,
   };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return error;
-    }
-    return { message: "Email sent:", info: info };
-  });
+  await transporter.sendMail(mailOptions);
+  return sendMail;
 };
 
 const orderReceivedMail = async (data, id) => {
