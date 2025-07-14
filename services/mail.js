@@ -123,6 +123,8 @@ const orderReceivedMail = async (data, id) => {
     console.error("Verification failed", err);
   }
 
+  console.log(transporter.sendMail);
+
   transporter.sendMail(mailOptions, (error, info) => {
     console.log("first");
     if (error) {
