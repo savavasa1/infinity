@@ -113,28 +113,12 @@ const orderReceivedMail = async (data, id) => {
     from: "sava.stankovic2002@gmail.com",
     to: data.Email,
     subject: "Thank You for Your Order! 🛍️",
-    html: htmlOutput,
+    html: <p>texst</p>,
   };
 
-  try {
-    await transporter.verify();
-    console.log("Server is ready to take our messages");
-  } catch (err) {
-    console.error("Verification failed", err);
-  }
+  const sendMail = transporter.sendMail(mailOptions);
 
-  console.log(transporter.sendMail);
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    console.log("first");
-    if (error) {
-      console.log(error);
-      return error;
-    }
-    console.log("Email sent:", info);
-
-    return { message: "Email sent:", info: info };
-  });
+  return sendMail;
 };
 
 module.exports = { sendNewsletterMail, orderReceivedMail };
