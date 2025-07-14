@@ -84,8 +84,6 @@ const orderReceivedMail = async (data, id) => {
 
   const tableAll = await mapProducts();
 
-  console.log(tableAll);
-
   // transporter.sendMail(mailOptions, (error, info) => {
   //   if (error) {
   //     return console.error("Error sending email:", error);
