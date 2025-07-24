@@ -36,7 +36,7 @@ const sendNewsletterMail = async (mail, promoCode) => {
     subject: "Your 10% Off Coupon Code 🎉",
     html: htmlOutput,
   };
-  await transporter.sendMail(mailOptions);
+  const sendMail = await transporter.sendMail(mailOptions);
   return sendMail;
 };
 
