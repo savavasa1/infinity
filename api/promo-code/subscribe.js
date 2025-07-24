@@ -24,14 +24,14 @@ app.post("/api/promo-code/subscribe", async (req, res) => {
   const isMailValid = checkEmailValidity(req.body.email);
   if (!isMailValid) {
     return res.status(422).json({
-      error: "You have entered an invalid email address",
+      error: "Uneli ste nevalidnu imejl adresu.",
       status: 422,
     });
   }
   const isSubscribed = await isEmailSubscribed("promo-codes", req.body.email);
   if (isSubscribed) {
     res.status(409).json({
-      error: "Email is already subscribed to the newsletter.",
+      error: "Ova imejl adresa je već prijavljena.",
     });
   }
   if (!isSubscribed) {

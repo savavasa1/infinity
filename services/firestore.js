@@ -29,11 +29,11 @@ async function checkPromoCode(code, collectionName = "promo-codes") {
   const snapshot = data.find((present) => present.code_name === code);
 
   if (typeof snapshot === "undefined") {
-    return { message: "You have entered an invalid code!" };
+    return { message: "Uneli ste nevažeći promo kod!" };
   }
 
   if (snapshot.is_used) {
-    return { message: "This promo code has already been used!" };
+    return { message: "Ovaj promo kod je već iskorišćen!" };
   }
 
   return snapshot;
