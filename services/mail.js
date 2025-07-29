@@ -42,7 +42,7 @@ const sendNewsletterMail = async (mail, promoCode) => {
 
 const orderReceivedMail = async (data, id) => {
   const response = await axios.get(
-    "https://infinity-git-feature-order-sava-stankovics-projects.vercel.app/services/orderconfirmation.html"
+    "https://infinity-one-tau.vercel.app/services/orderconfirmation.html"
   );
   const emailTemplate = response.data;
 
