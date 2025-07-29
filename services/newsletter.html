@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Welcome to our Newsletter</title>
+    <title>Dobrodošli u naš newsletter</title>
     <style type="text/css">
       body {
         font-family: Arial, sans-serif;
@@ -110,20 +110,21 @@
           alt="Infinity Logo"
         />
         <h1 style="text-align: center">
-          Thank You for Subscribing to our Newsletter!
+          Hvala vam za prijavu na naš Newsletter!
         </h1>
       </div>
       <div class="email-body">
         <p style="text-align: center">
-          Welcome to our newsletter. We're glad to have you on board!
+          Hvala vam što ste se prijavili! Drago nam je što ste deo naše
+          zajednice!
         </p>
         <p style="text-align: center">
-          As promised, here is your exclusive <strong>10% OFF</strong> coupon
-          code:
+          Kao što smo obećali, izvolite vaš ekskluzivni promo kod za
+          <strong>10% POPUSTA:</strong>
         </p>
-        <div class="coupon">{{ COUPON_CODE }}</div>
+        <div class="coupon" onclick="copypromocode()">{{ COUPON_CODE }}</div>
         <p style="text-align: center">
-          Use this at checkout on your next order. Enjoy!
+          Iskoristite ga prilikom sledeće kupovine. Uživajte!
         </p>
       </div>
       <!--   <div class="email-body">
@@ -156,19 +157,27 @@
         </div>
       </div> -->
       <div class="email-footer">
+        <p>ZA DODATNA PITANJA ILI INFORMACIJE MOŽETE NAS NAĆI NA:</p>
         <p>
-          If you did not subscribe to this newsletter, please ignore this email.
-        </p>
-
-        <p>AKO IMATE BILO KAKVA PITANJA KONTAKTIRAJTE NAS NA</p>
-        <p>
-          <a href="mailto:andrea.zivic@gmail.com">andrea.zivic@gmail.com</a>
+          <a href="mailto:infinityplansplaneri@gmail.com"
+            >infinityplansplaneri@gmail.com</a
+          >
         </p>
         <p>
-          <a href="tel:+381693380010">(+381) 69 33 80 010</a>
+          <a
+            href="https://www.instagram.com/infinityplans_/?hl=en"
+            target="_blank"
+            >Instagram: @infinityplans_</a
+          >
         </p>
         <!-- <p>{{ YEAR }} all rights reserved © Infinity</p> -->
       </div>
     </div>
+    <script>
+      const copypromocode = () => {
+        navigator.clipboard.writeText(COUPON_CODE);
+      };
+      console.log(COUPON_CODE);
+    </script>
   </body>
 </html>
