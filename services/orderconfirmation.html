@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Your Order has been</title>
+    <title>Vaša narudžbina je primljena</title>
     <style type="text/css">
       body {
         font-family: Arial, sans-serif;
@@ -109,22 +109,23 @@
           src="https://cdn.prod.website-files.com/68120f32151df292344f7f42/6812119f9a05faf728be480c_Infinity.png"
           alt="Infinity Logo"
         />
-        <h1 style="text-align: center">Thank You for Your Order! 🛍️</h1>
+        <h1 style="text-align: center">Hvala vam na narudžbini! 🛍️</h1>
       </div>
       <div class="email-body">
-        <p>We have received your order. Your Order ID is {{ OrderID }}.</p>
-        <p>Order Information:</p>
-        <p>Full Name: {{ name }}</p>
-        <p>Email Address: {{ email }}</p>
-        <p>Phone: {{ phone }}</p>
-        <p>Shipping Address: {{ address }}</p>
-        <p>Shipping method: {{ shippingMethod }}</p>
+        <p>Primili smo vašu narudžbinu. ID vaše narudžbine je {{ OrderID }}.</p>
+        <p>Informacije:</p>
+        <p>Puno ime: {{ name }}</p>
+        <p>Imejl adresa: {{ email }}</p>
+        <p>Broj telefona: {{ phone }}</p>
+        <p>Adresa za dostavu: {{ address }}</p>
+        <p>Način dostave: {{ shippingMethod }}</p>
+        <p>Način plaćanja: {{ paymentMethod }}</p>
         <table class="product-table">
           <thead>
             <tr class="product-item">
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Price</th>
+              <th>Proizvod</th>
+              <th>Količina</th>
+              <th>Cena</th>
             </tr>
           </thead>
           <tbody>
@@ -134,23 +135,22 @@
       </div>
       <div class="email-footer">
         <div style="text-align: right; font-weight: bold">
-          <p>Subtotal Price: {{ subtotal }}</p>
-          <p>Shipping Price: {{ shippingPrice }}</p>
-          <p>Total Price: {{ total }}</p>
+          <p>Cena korpe: {{ subtotal }}</p>
+          <p>Cena dostave: {{ shippingPrice }}</p>
+          <p>Ukupna cena: {{ total }}</p>
         </div>
       </div>
       <div class="email-footer">
+        <p>ZA DODATNA PITANJA ILI INFORMACIJE MOŽETE NAS NAĆI NA:</p>
         <p>
-          FOR ANY ADDITIONAL QUESTIONS OR INFORMATIONS YOU CAN CONTACT US ON:
+          <a href="mailto:infinityplansplaneri@gmail.com"
+            >infinityplansplaneri@gmail.com</a
+          >
         </p>
         <p>
-          <a href="mailto:andrea.zivic@gmail.com">andrea.zivic@gmail.com</a>
-        </p>
-        <p>
-          <a href="tel:+381693380010">(+381) 69 33 80 010</a>
-        </p>
-        <p>
-          <a href="https://www.instagram.com/infinityplans_/?hl=en"
+          <a
+            href="https://www.instagram.com/infinityplans_/?hl=en"
+            target="_blank"
             >Instagram: @infinityplans_</a
           >
         </p>
