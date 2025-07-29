@@ -122,7 +122,7 @@
           Kao što smo obećali, izvolite vaš ekskluzivni promo kod za
           <strong>10% POPUSTA:</strong>
         </p>
-        <div class="coupon">{{ COUPON_CODE }}</div>
+        <div class="coupon" onclick="copypromocode()">{{ COUPON_CODE }}</div>
         <p style="text-align: center">
           Iskoristite ga prilikom sledeće kupovine. Uživajte!
         </p>
@@ -173,5 +173,11 @@
         <!-- <p>{{ YEAR }} all rights reserved © Infinity</p> -->
       </div>
     </div>
+    <script>
+      const copypromocode = () => {
+        navigator.clipboard.writeText(COUPON_CODE);
+      };
+      console.log(COUPON_CODE);
+    </script>
   </body>
 </html>
