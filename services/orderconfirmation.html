@@ -114,12 +114,12 @@
       <div class="email-body">
         <p>Primili smo vašu narudžbinu. ID vaše narudžbine je {{ OrderID }}.</p>
         <p>Informacije:</p>
-        <p>Puno ime: {{ name }}</p>
-        <p>Imejl adresa: {{ email }}</p>
+        <p>Ime i Prezime: {{ name }}</p>
+        <p>Email adresa: {{ email }}</p>
         <p>Broj telefona: {{ phone }}</p>
         <p>Adresa za dostavu: {{ address }}</p>
         <p>Način dostave: {{ shippingMethod }}</p>
-        <p>Način plaćanja: Plaćanje pouzećem</p>
+        <p>Način plaćanja: {{ paymentMethod }}</p>
         <table class="product-table">
           <thead>
             <tr class="product-item">
@@ -135,9 +135,7 @@
       </div>
       <div class="email-footer">
         <div style="text-align: right; font-weight: bold">
-          <p>Cena korpe: {{ subtotal }}</p>
-          <p>Cena dostave: {{ shippingPrice }}</p>
-          <p>Ukupna cena: {{ total }}</p>
+          <p>Cena proizvoda: {{ subtotal }}</p>
         </div>
       </div>
       <div class="email-footer">

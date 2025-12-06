@@ -53,9 +53,10 @@ const orderReceivedMail = async (data, id) => {
     address: `${data["Street Address"]}, ${data["Zip Code"]} ${data.City}, ${data.Country} `,
     cart: data["Cart Order"],
     total: data["Total Price"],
-    subtotal: data["Subtotal Price"],
+    subtotal: data["Total Price"],
     OrderID: id,
-    shippingMethod: data["Shipping Method"],
+    shippingMethod: data["Dostava"],
+    paymentMethod: data["Placanje"],
     shippingPrice: data["Shipping Price"],
   };
 
