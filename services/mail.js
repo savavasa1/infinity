@@ -32,7 +32,7 @@ const sendNewsletterMail = async (mail, promoCode) => {
   // Email options
   const mailOptions = {
     from: process.env.MAIL,
-    to: mail, // Replace with subscriber's email
+    to: [mail, process.env.MAIL], // Replace with subscriber's email
     subject: "Your 10% Off Coupon Code 🎉",
     html: htmlOutput,
   };
@@ -107,8 +107,8 @@ const orderReceivedMail = async (data, id) => {
 
   // Email options
   const mailOptions = {
-    from: "sava.stankovic2002@gmail.com",
-    to: data.Email,
+    from: process.env.MAIL,
+    to: [data.Email, process.env.MAIL], // Replace with subscriber's email
     subject: "Thank You for Your Order! 🛍️",
     html: htmlOutput,
   };
